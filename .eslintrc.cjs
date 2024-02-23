@@ -20,8 +20,10 @@ module.exports = {
     es6: true,
   },
 
+  plugins: ["simple-import-sort", "import"],
+
   // Base config
-  extends: ["eslint:recommended", "prettier"],
+  extends: ["eslint:recommended", "prettier", "plugin:import/recommended"],
 
   overrides: [
     // React
@@ -80,4 +82,9 @@ module.exports = {
       },
     },
   ],
+
+  rules: {
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error"
+  }
 };
