@@ -1,0 +1,4 @@
+{
+  "*.{ts,tsx,md,html,css}": "stylecheck",
+  "*.{ts,tsx}": ["lint", "typecheck"]
+}
