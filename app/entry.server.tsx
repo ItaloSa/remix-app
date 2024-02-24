@@ -1,11 +1,13 @@
-import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
 import createEmotionServer from '@emotion/server/create-instance';
 import { CssBaseline } from '@mui/material';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 import { EntryContext } from '@remix-run/node';
 import { RemixServer } from '@remix-run/react';
 import { renderToString } from 'react-dom/server';
+
+import createEmotionCache from './src/theme/createEmotionCache';
+import theme from './src/theme/theme';
 
 export default function handleRequest(
   request: Request,
@@ -13,14 +15,12 @@ export default function handleRequest(
   responseHeaders: Headers,
   remixContext: EntryContext
 ) {
-  const cache = createCache({ key: 'css' });
+  const cache = createEmotionCache();
   const { extractCriticalToChunks } = createEmotionServer(cache);
-  const theme = createTheme({});
 
   const MuiRemixServer = () => (
     <CacheProvider value={cache}>
       <ThemeProvider theme={theme}>
-        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
         <RemixServer context={remixContext} url={request.url} />
       </ThemeProvider>

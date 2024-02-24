@@ -1,32 +1,26 @@
-import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
-import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
+import { CssBaseline, ThemeProvider } from '@mui/material';
 import { RemixBrowser } from '@remix-run/react';
 import { startTransition, StrictMode } from 'react';
 import { hydrateRoot } from 'react-dom/client';
 
-startTransition(() => {
-  hydrateRoot(
-    document,
-    <StrictMode>
-      <RemixBrowser />
-    </StrictMode>
-  );
-});
+import createEmotionCache from './src/theme/createEmotionCache';
+import theme from './src/theme/theme';
 
 const hydrate = () => {
-  const theme = createTheme({});
+  const emotionCache = createEmotionCache();
 
   startTransition(() => {
     hydrateRoot(
       document,
-      <CacheProvider value={createCache({ key: 'css' })}>
-        <ThemeProvider theme={theme}>
-          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-          <CssBaseline />
-          <RemixBrowser />
-        </ThemeProvider>
-      </CacheProvider>
+      <StrictMode>
+        <CacheProvider value={emotionCache}>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <RemixBrowser />
+          </ThemeProvider>
+        </CacheProvider>
+      </StrictMode>
     );
   });
 };
