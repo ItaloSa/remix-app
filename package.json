@@ -10,7 +10,7 @@
     "start": "remix-serve ./build/server/index.js",
     "typecheck": "tsc",
     "prepare": "husky",
-    "stylecheck": "prettier . --check",
+    "stylecheck": "prettier --write",
     "test": "vitest"
   },
   "dependencies": {
