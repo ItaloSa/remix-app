@@ -1,4 +1,4 @@
 {
-  "*.{ts,tsx,md,html,css}": "stylecheck",
-  "*.{ts,tsx}": ["lint", "typecheck"]
+  "*.{ts,tsx,md,html,css}": "npm run stylecheck",
+  "*.{ts,tsx}": ["npm run lint"]
 }
